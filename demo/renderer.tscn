@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://kvbnukb0q1uk"]
+
+[ext_resource type="PackedScene" uid="uid://bggkaprn62fwm" path="res://main.tscn" id="1_in5ti"]
+[ext_resource type="Script" uid="uid://cgkdeawopjvwg" path="res://renderer.gd" id="1_wbjjg"]
+[ext_resource type="Shader" uid="uid://b2a2desdsc4bs" path="res://glyph_data.gdshader" id="3_in5ti"]
+[ext_resource type="Shader" uid="uid://k1q8n36glsta" path="res://glyphs.gdshader" id="3_wxhd8"]
+[ext_resource type="Texture2D" uid="uid://bgj3ob3r7w6ef" path="res://ascii/atlas-66.png" id="4_wbjjg"]
+[ext_resource type="PackedScene" uid="uid://b0efehuavobda" path="res://hud.tscn" id="6_6cfh2"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6cfh2"]
+viewport_path = NodePath("Content")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_in5ti"]
+resource_local_to_scene = true
+shader = ExtResource("3_in5ti")
+shader_parameter/content = SubResource("ViewportTexture_6cfh2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_in5ti"]
+viewport_path = NodePath("GlyphData")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sf31i"]
+resource_local_to_scene = true
+shader = ExtResource("3_wxhd8")
+shader_parameter/glyph_data = SubResource("ViewportTexture_in5ti")
+shader_parameter/glyphs = ExtResource("4_wbjjg")
+
+[node name="Renderer" type="Node2D" unique_id=599185854]
+script = ExtResource("1_wbjjg")
+
+[node name="Content" type="SubViewport" parent="." unique_id=454229123]
+transparent_bg = true
+size = Vector2i(480, 720)
+
+[node name="Main" parent="Content" unique_id=1975992027 instance=ExtResource("1_in5ti")]
+
+[node name="GlyphData" type="SubViewport" parent="." unique_id=112046231]
+transparent_bg = true
+size = Vector2i(100, 90)
+
+[node name="ColorRect" type="ColorRect" parent="GlyphData" unique_id=210830826]
+material = SubResource("ShaderMaterial_in5ti")
+offset_right = 100.0
+offset_bottom = 90.0
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=347298968]
+material = SubResource("ShaderMaterial_sf31i")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 480.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HUD" parent="." unique_id=126421993 instance=ExtResource("6_6cfh2")]
+unique_name_in_owner = true
+
+[connection signal="start_game" from="HUD" to="Content/Main" method="new_game"]

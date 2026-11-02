@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://kvbnukb0q1uk"]
+
+[ext_resource type="Script" uid="uid://2p06fpm5v7h1" path="res://content.gd" id="1_wbjjg"]
+[ext_resource type="Texture2D" uid="uid://53ti787qebwr" path="res://icon.svg" id="2_in5ti"]
+[ext_resource type="Shader" uid="uid://dh0ubc7mdxjcq" path="res://glyph_data.gdshader" id="3_in5ti"]
+[ext_resource type="Shader" uid="uid://b6pkqa70xxev4" path="res://glyphs.gdshader" id="3_wxhd8"]
+[ext_resource type="Texture2D" uid="uid://biqjfbletctro" path="res://ascii/atlas-66.png" id="5_wbjjg"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6cfh2"]
+viewport_path = NodePath("Content")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_in5ti"]
+resource_local_to_scene = true
+shader = ExtResource("3_in5ti")
+shader_parameter/content = SubResource("ViewportTexture_6cfh2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_in5ti"]
+viewport_path = NodePath("GlyphData")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sf31i"]
+resource_local_to_scene = true
+shader = ExtResource("3_wxhd8")
+shader_parameter/glyph_data = SubResource("ViewportTexture_in5ti")
+shader_parameter/glyphs = ExtResource("5_wbjjg")
+
+[node name="Renderer" type="Node2D" unique_id=599185854]
+
+[node name="Content" type="SubViewport" parent="." unique_id=454229123]
+size = Vector2i(768, 432)
+script = ExtResource("1_wbjjg")
+
+[node name="Icon" type="Sprite2D" parent="Content" unique_id=1005042006]
+position = Vector2(384, 216)
+scale = Vector2(2, 2)
+texture = ExtResource("2_in5ti")
+
+[node name="GlyphData" type="SubViewport" parent="." unique_id=112046231]
+transparent_bg = true
+size = Vector2i(160, 54)
+
+[node name="ColorRect" type="ColorRect" parent="GlyphData" unique_id=210830826]
+material = SubResource("ShaderMaterial_in5ti")
+offset_right = 160.0
+offset_bottom = 54.0
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=347298968]
+material = SubResource("ShaderMaterial_sf31i")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 768.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
