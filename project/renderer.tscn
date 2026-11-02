@@ -26,29 +26,31 @@ shader_parameter/glyphs = ExtResource("5_wbjjg")
 [node name="Renderer" type="Node2D" unique_id=599185854]
 
 [node name="Content" type="SubViewport" parent="." unique_id=454229123]
-size = Vector2i(768, 432)
+size = Vector2i(384, 216)
 script = ExtResource("1_wbjjg")
 
 [node name="Icon" type="Sprite2D" parent="Content" unique_id=1005042006]
-position = Vector2(384, 216)
-scale = Vector2(2, 2)
+position = Vector2(192, 108)
 texture = ExtResource("2_in5ti")
 
 [node name="GlyphData" type="SubViewport" parent="." unique_id=112046231]
 transparent_bg = true
 size = Vector2i(160, 54)
 
-[node name="ColorRect" type="ColorRect" parent="GlyphData" unique_id=210830826]
+[node name="GlyphDataRect" type="ColorRect" parent="GlyphData" unique_id=210830826]
 material = SubResource("ShaderMaterial_in5ti")
-offset_right = 160.0
-offset_bottom = 54.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=347298968]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2019768039]
+
+[node name="GlyphRect" type="ColorRect" parent="CanvasLayer" unique_id=347298968]
 material = SubResource("ShaderMaterial_sf31i")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 768.0
-offset_bottom = 432.0
 grow_horizontal = 2
 grow_vertical = 2

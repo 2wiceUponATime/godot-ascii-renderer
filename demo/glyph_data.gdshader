@@ -10,7 +10,7 @@ void fragment() {
 	vec3 c = vec3(0);
 	for (int x = 0; x < NUM_SAMPLES; x++) {
 		for (int y = 0; y < NUM_SAMPLES; y++) {
-			vec2 offset = SCREEN_PIXEL_SIZE * vec2(float(x), float(y)) / float(NUM_SAMPLES);
+			vec2 offset = SCREEN_PIXEL_SIZE * ((vec2(float(x), float(y)) + 0.5) / float(NUM_SAMPLES) - 0.5);
 			vec4 color = texture(content, (UV + offset));
 			c += color.rgb * color.a;
 		}
