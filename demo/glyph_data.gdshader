@@ -5,14 +5,13 @@ uniform sampler2D content : filter_nearest;
 
 const int NUM_SAMPLES = 4;
 const int NUM_GLYPHS = 70;
-const float CELL_WIDTH = 1.0;
 
 void fragment() {
 	vec3 c = vec3(0);
 	for (int x = 0; x < NUM_SAMPLES; x++) {
 		for (int y = 0; y < NUM_SAMPLES; y++) {
 			vec2 offset = SCREEN_PIXEL_SIZE * vec2(float(x), float(y)) / float(NUM_SAMPLES);
-			vec4 color = texture(content, (UV + offset) * vec2(CELL_WIDTH, 1.0));
+			vec4 color = texture(content, (UV + offset));
 			c += color.rgb * color.a;
 		}
 	}
